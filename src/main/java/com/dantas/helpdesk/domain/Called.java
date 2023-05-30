@@ -5,21 +5,41 @@ import java.util.Objects;
 
 import com.dantas.helpdesk.domain.enums.Priority;
 import com.dantas.helpdesk.domain.enums.Status;
+import com.fasterxml.jackson.annotation.JsonFormat;
 
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
+
+@Entity (name = "tb_called")
 public class Called {
-
+		private static final long serialVersionUID = 1L;
+		
+		@Id
+		@GeneratedValue(strategy = GenerationType.IDENTITY)
 		private Integer id;
+		
+		@JsonFormat(pattern = "dd/mm/yyyy")
 		private LocalDate openDate = LocalDate.now();
+		@JsonFormat(pattern = "dd/mm/yyyy")
 		private LocalDate closeDate;
 		
-		private Priority priority;
 		
+		private Priority priority;
 		private Status status;
 		
 		private String title;
 		private String observation;
 		
+		@ManyToOne
+		@JoinColumn(name = "tecnic_id")
 		private Tecnic tecnic;
+		
+		@ManyToOne
+		@JoinColumn(name = "client_id")
 		private Client client;
 		
 		public Called() {
