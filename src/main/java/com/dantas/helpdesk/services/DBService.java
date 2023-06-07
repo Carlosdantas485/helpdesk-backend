@@ -17,27 +17,69 @@ import com.dantas.helpdesk.domain.repositories.TecnicRepository;
 
 @Service
 public class DBService {
-	
+
 	@Autowired
-	private TecnicRepository tecnicoRepository;
-	
+	private TecnicRepository tecnicRepository;
+
 	@Autowired
-	private ClientRepository clienteRepository;
-	
+	private ClientRepository clientRepository;
+
 	@Autowired
 	private CalledRepository calledRepository;
-	
+
 	public void DBInstance() {
 
-		Tecnic tec1 = new Tecnic(null, "Carlos Dantas", "13220629784", "carlos@gmail.com", "Test123*");
-		tec1.addProfiles(Profile.ADMIN);
-		
-		Client cli1 = new Client(null, "Thiago Mello", "13220629734", "linux@gmail.com", "Test123*");
-		
-		Called c1 = new Called(null, Priority.MEDIUM, Status.INPROGRESS, "Called 01", "First Calles", tec1, cli1);
-	
-		tecnicoRepository.saveAll(Arrays.asList(tec1));
-		clienteRepository.saveAll(Arrays.asList(cli1));
-		calledRepository.saveAll(Arrays.asList(c1));
+		Tecnic t1 = new Tecnic(null, "Valdir Cezar", "144.785.300-84", "(88) 98888-8888", "12344");
+		t1.addProfiles(Profile.ADMIN);
+
+		Client c1 = new Client(null, "Betina Campos", "598.508.200-80", "(88) 98888-7777", "12344");
+
+		Called os1 = new Called(null, Priority.HIGHT, Status.INPROGRESS, "Trocar fonte do notebook", "dasdas", t1, c1);
+
+		tecnicRepository.saveAll(Arrays.asList(t1));
+		clientRepository.saveAll(Arrays.asList(c1));
+		calledRepository.saveAll(Arrays.asList(os1));
+		/*
+		 * Tecnic t1 = new Tecnic(null, "Valdir Cezar", "144.785.300-84",
+		 * "(88) 98888-8888", "12344"); t1.addProfiles(Profile.ADMIN); Tecnic t2 = new
+		 * Tecnic(null, "Linus Torvalds", "641.760.040-88", "(88) 94545-4545", "12344");
+		 * Tecnic t3 = new Tecnic(null, "Alan Turing", "332.040.820-83",
+		 * "(88) 96345-9874", "12344"); Tecnic t4 = new Tecnic(null, "Richard Stallman",
+		 * "756.192.280-96", "(88) 98745-8542","12344"); Tecnic t5 = new Tecnic(null,
+		 * "Tim Berners-Lee", "926.076.200-66", "(88) 98545-3685","12344");
+		 * 
+		 * Client c1 = new Client(null, "Betina Campos", "598.508.200-80",
+		 * "(88) 98888-7777", "12344"); Client c2 = new Client(null, "Galileu Galilei",
+		 * "089.637.320-70", "(88) 97854-6985", "12344"); Client c3 = new Client(null,
+		 * "Isaac Newton", "422.876.280-88", "(88) 95555-6541", "12344"); Client c4 =
+		 * new Client(null, "Marie Curie", "420.724.490-57", "(88) 96666-8523",
+		 * "12344"); Client c5 = new Client(null, "Albert Einstein", "047.166.710-20",
+		 * "(88) 98755-4412", "12344");
+		 * 
+		 * Called os1 = new Called(null, Priority.HIGHT,Status.INPROGRESS,
+		 * "Trocar fonte do notebook", "dasdas", t1, c1); Called os2 = new Called(null,
+		 * Priority.LOW, Status.INPROGRESS, "Trocar placa mãe", "asdasdas", t2, c2);
+		 * Called os3 = new Called(null, Priority.HIGHT, Status.INPROGRESS,
+		 * "Formatar para linux", "", t3, c3); Called os4 = new Called(null,
+		 * Priority.MEDIUM, Status.INPROGRESS, "Ativar antivirus", "", t4, c4); Called
+		 * os5 = new Called(null, Priority.MEDIUM, Status.INPROGRESS,
+		 * "Criar sistema full stack", "", t5, c5); Called os6 = new Called(null,
+		 * Priority.LOW, Status.INPROGRESS, "Trocar pasta térmica", "", t1, c1);
+		 * 
+		 * tecnicRepository.saveAll(Arrays.asList(t1));
+		 * tecnicRepository.saveAll(Arrays.asList(t2));
+		 * tecnicRepository.saveAll(Arrays.asList(t3));
+		 * tecnicRepository.saveAll(Arrays.asList(t4));
+		 * tecnicRepository.saveAll(Arrays.asList(t5));
+		 * 
+		 * clientRepository.saveAll(Arrays.asList(c1));
+		 * calledRepository.saveAll(Arrays.asList(os1));
+		 * 
+		 * 
+		 * 
+		 * tecnicRepository.saveAll(Arrays.asList(t1, t2, t3, t4, t5));
+		 * clientRepository.saveAll(Arrays.asList(c1, c2, c3, c4, c5));
+		 * calledRepository.saveAll(Arrays.asList(os1, os2, os3, os4, os5, os6));
+		 */
 	}
 }

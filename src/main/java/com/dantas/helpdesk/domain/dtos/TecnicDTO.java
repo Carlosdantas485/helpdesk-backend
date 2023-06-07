@@ -1,62 +1,54 @@
-package com.dantas.helpdesk.domain;
+package com.dantas.helpdesk.domain.dtos;
 
 import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.HashSet;
-import java.util.Objects;
 import java.util.Set;
+import java.util.stream.Collector;
 import java.util.stream.Collectors;
 
+import com.dantas.helpdesk.domain.Tecnic;
 import com.dantas.helpdesk.domain.enums.Profile;
 import com.fasterxml.jackson.annotation.JsonFormat;
 
 import jakarta.persistence.CollectionTable;
 import jakarta.persistence.Column;
 import jakarta.persistence.ElementCollection;
-import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 
-@Entity (name = "tb_people")
-public abstract class People implements Serializable{
-	
+public class TecnicDTO implements Serializable {
 	private static final long serialVersionUID = 1L;
-	
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
+
 	protected Integer id;
-	
+
 	protected String name;
-	
-	@Column (unique = true)
+
 	protected String cpf;
-	
-	@Column (unique = true)
+
 	protected String email;
 	protected String password;
-	
-	@ElementCollection(fetch = FetchType.EAGER)
-	@CollectionTable(name = "PROFILES")
+
 	protected Set<Integer> profiles = new HashSet<>();
-	
+
 	@JsonFormat(pattern = "dd/MM/yyyy")
-	protected LocalDate dataCreatedUser = LocalDate.now(); 
-	
-	public People() {
+	protected LocalDate dataCreatedUser = LocalDate.now();
+
+	public TecnicDTO() {
 		super();
-		addProfiles(Profile.CLIENT);
 	}
 
-	public People(Integer id, String name, String cpf, String email, String password) {
+	public TecnicDTO(Tecnic obj) {
 		super();
-		this.id = id;
-		this.name = name;
-		this.cpf = cpf;
-		this.email = email;
-		this.password = password;
-		addProfiles(Profile.CLIENT);
+		this.id = obj.getId();
+		this.name = obj.getName();
+		this.cpf = obj.getCpf();
+		this.email = obj.getEmail();
+		this.password = obj.getPassword();
+		this.profiles = obj.getProfiles().stream().map(x -> x.getCode()).collect(Collectors.toSet());
+		this.dataCreatedUser = obj.getDataCreatedUser();
 	}
 
 	public Integer getId() {
@@ -114,30 +106,7 @@ public abstract class People implements Serializable{
 	public void setDataCreatedUser(LocalDate dataCreatedUser) {
 		this.dataCreatedUser = dataCreatedUser;
 	}
-
-	public static long getSerialversionuid() {
-		return serialVersionUID;
-	}
-
-	@Override
-	public int hashCode() {
-		return Objects.hash(cpf, id);
-	}
-
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		People other = (People) obj;
-		return Objects.equals(cpf, other.cpf) && Objects.equals(id, other.id);
-	}
 	
 	
 	
 }
-
-	

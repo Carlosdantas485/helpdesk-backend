@@ -1,5 +1,6 @@
 package com.dantas.helpdesk.domain;
 
+
 import java.time.LocalDate;
 import java.util.Objects;
 
@@ -20,13 +21,13 @@ public class Called {
 		
 		@Id
 		@GeneratedValue(strategy = GenerationType.IDENTITY)
-		private Integer id;
+		private Integer  id;
 		
-		@JsonFormat(pattern = "dd/mm/yyyy")
-		private LocalDate openDate = LocalDate.now();
-		@JsonFormat(pattern = "dd/mm/yyyy")
-		private LocalDate closeDate;
+		@JsonFormat(pattern = "dd/MM/yyyy")
+		private LocalDate openData = LocalDate.now();
 		
+		@JsonFormat(pattern = "dd/MM/yyyy")
+		private LocalDate closeData = null;
 		
 		private Priority priority;
 		private Status status;
@@ -66,20 +67,20 @@ public class Called {
 			this.id = id;
 		}
 
-		public LocalDate getOpenDate() {
-			return openDate;
+		public LocalDate getOpenData() {
+			return openData;
 		}
 
-		public void setOpenDate(LocalDate openDate) {
-			this.openDate = openDate;
+		public void setOpenData(LocalDate openData) {
+			this.openData = openData;
 		}
 
-		public LocalDate getCloseDate() {
-			return closeDate;
+		public LocalDate getCloseData() {
+			return closeData;
 		}
 
-		public void setCloseDate(LocalDate closeDate) {
-			this.closeDate = closeDate;
+		public void setCloseData(LocalDate closeData) {
+			this.closeData = closeData;
 		}
 
 		public Priority getPriority() {
@@ -130,6 +131,10 @@ public class Called {
 			this.client = client;
 		}
 
+		public static long getSerialversionuid() {
+			return serialVersionUID;
+		}
+
 		@Override
 		public int hashCode() {
 			return Objects.hash(id);
@@ -146,6 +151,10 @@ public class Called {
 			Called other = (Called) obj;
 			return Objects.equals(id, other.id);
 		}
+		
+		
+
+		
 		
 		
 		
