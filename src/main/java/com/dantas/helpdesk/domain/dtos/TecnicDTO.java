@@ -4,28 +4,25 @@ import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.HashSet;
 import java.util.Set;
-import java.util.stream.Collector;
 import java.util.stream.Collectors;
 
 import com.dantas.helpdesk.domain.Tecnic;
 import com.dantas.helpdesk.domain.enums.Profile;
 import com.fasterxml.jackson.annotation.JsonFormat;
 
-import jakarta.persistence.CollectionTable;
-import jakarta.persistence.Column;
-import jakarta.persistence.ElementCollection;
-import jakarta.persistence.FetchType;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.validation.constraints.NotNull;
 
 public class TecnicDTO implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	protected Integer id;
+	@NotNull(message = "Name is required!")
 	protected String name;
+	@NotNull(message = "CPF is required!")
 	protected String cpf;
+	@NotNull(message = "E-mail is required!")
 	protected String email;
+	@NotNull(message = "Password is required!")
 	protected String password;
 
 	protected Set<Integer> profiles = new HashSet<>();

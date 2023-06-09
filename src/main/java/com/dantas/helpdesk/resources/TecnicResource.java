@@ -18,11 +18,11 @@ import com.dantas.helpdesk.domain.Tecnic;
 import com.dantas.helpdesk.domain.dtos.TecnicDTO;
 import com.dantas.helpdesk.services.TecnicService;
 
+import jakarta.validation.Valid;
+
 @RestController
 @RequestMapping(value = "/tecnics")
 public class TecnicResource {
-	
-	//localhost:8080/tecnics/1
 	
 	@Autowired
 	private TecnicService service;
@@ -30,7 +30,6 @@ public class TecnicResource {
 	@GetMapping(value = "/{id}")
 	public ResponseEntity<TecnicDTO> findById(@PathVariable Integer id) {
 		Tecnic obj = service.findById(id);
-		
 		return ResponseEntity.ok().body(new TecnicDTO(obj));
 	}
 	
@@ -43,13 +42,10 @@ public class TecnicResource {
 	}
 	
 	@PostMapping
-	public ResponseEntity<TecnicDTO> create(@RequestBody TecnicDTO objDTO){
-		
+	public ResponseEntity<TecnicDTO> create(@Valid @RequestBody TecnicDTO objDTO){
 		
 		Tecnic newObj = service.create(objDTO);
-		
 		URI	uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(newObj.getId()).toUri();
-		
 		return ResponseEntity.created(uri).build();
 		
 		
