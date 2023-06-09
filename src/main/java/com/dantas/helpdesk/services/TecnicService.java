@@ -1,11 +1,13 @@
 package com.dantas.helpdesk.services;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.dantas.helpdesk.domain.Tecnic;
+import com.dantas.helpdesk.domain.dtos.TecnicDTO;
 import com.dantas.helpdesk.domain.repositories.TecnicRepository;
 import com.dantas.helpdesk.services.exceptions.ObjectNotFoundException;
 
@@ -18,6 +20,18 @@ public class TecnicService {
 	public Tecnic findById(Integer id) {
 		Optional<Tecnic> obj = repository.findById(id);
 		return obj.orElseThrow(() -> new ObjectNotFoundException("Object not found! Id: "+ id));
+	}
+	
+	public List<Tecnic> findAll(){
+		return repository.findAll();
+	}
+
+	public Tecnic create(TecnicDTO objDTO) {
+		
+		objDTO.setId(null);
+		Tecnic newObj = new Tecnic(objDTO);
+		
+		return repository.save(newObj);
 	}
 
 }

@@ -2,14 +2,12 @@ package com.dantas.helpdesk.domain;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
-import com.dantas.helpdesk.domain.enums.Profile;
+import com.dantas.helpdesk.domain.dtos.TecnicDTO;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
 
 @Entity
@@ -26,6 +24,17 @@ public class Tecnic extends People {
 
 	public Tecnic(Integer id, String name, String cpf, String email, String password) {
 		super(id, name, cpf, email, password);
+	}
+	
+	public Tecnic(TecnicDTO obj) {
+		super();
+		this.id = obj.getId();
+		this.name = obj.getName();
+		this.cpf = obj.getCpf();
+		this.email = obj.getEmail();
+		this.password = obj.getPassword();
+		this.profiles = obj.getProfiles().stream().map(x -> x.getCode()).collect(Collectors.toSet());
+		this.dataCreatedUser = obj.getDataCreatedUser();
 	}
 
 	public List<Called> getCalled() {

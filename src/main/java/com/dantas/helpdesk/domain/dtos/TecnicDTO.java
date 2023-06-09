@@ -23,11 +23,8 @@ public class TecnicDTO implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	protected Integer id;
-
 	protected String name;
-
 	protected String cpf;
-
 	protected String email;
 	protected String password;
 
@@ -38,6 +35,7 @@ public class TecnicDTO implements Serializable {
 
 	public TecnicDTO() {
 		super();
+		addProfiles(Profile.CLIENT);
 	}
 
 	public TecnicDTO(Tecnic obj) {
