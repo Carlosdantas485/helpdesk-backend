@@ -14,6 +14,8 @@ import com.dantas.helpdesk.domain.repositories.TecnicRepository;
 import com.dantas.helpdesk.services.exceptions.DataIntegrityViolationException;
 import com.dantas.helpdesk.services.exceptions.ObjectNotFoundException;
 
+import jakarta.validation.Valid;
+
 @Service
 public class TecnicService {
 	
@@ -33,11 +35,18 @@ public class TecnicService {
 	}
 
 	public Tecnic create(TecnicDTO objDTO) {
-		
 		objDTO.setId(null);
 		CPFvalidateAndEmail(objDTO);
 		Tecnic newObj = new Tecnic(objDTO);
 		return repository.save(newObj);
+	}
+	
+	public Tecnic update(Integer id,@Valid TecnicDTO objDTO) {
+		objDTO.setId(id);
+		Tecnic oldObj= findById(id);
+		CPFvalidateAndEmail(objDTO);
+		oldObj = new Tecnic(objDTO);
+		return repository.save(oldObj);
 	}
 
 	private void CPFvalidateAndEmail(TecnicDTO objDTO) {
@@ -53,5 +62,7 @@ public class TecnicService {
 			throw new DataIntegrityViolationException("Email already exists!");
 		}
 	}
+
+	
 
 }

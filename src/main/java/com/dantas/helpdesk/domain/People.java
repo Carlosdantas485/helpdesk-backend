@@ -7,6 +7,8 @@ import java.util.Objects;
 import java.util.Set;
 import java.util.stream.Collectors;
 
+import org.hibernate.validator.constraints.br.CPF;
+
 import com.dantas.helpdesk.domain.enums.Profile;
 import com.fasterxml.jackson.annotation.JsonFormat;
 
@@ -30,6 +32,7 @@ public abstract class People implements Serializable{
 	
 	protected String name;
 	
+	@CPF
 	@Column (unique = true)
 	protected String cpf;
 	
