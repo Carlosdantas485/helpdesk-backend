@@ -6,19 +6,34 @@ import java.time.LocalDate;
 import com.dantas.helpdesk.domain.Called;
 import com.fasterxml.jackson.annotation.JsonFormat;
 
+import jakarta.validation.constraints.NotNull;
+
 public class CalledDTO implements Serializable{
 	private static final long serialVersionUID = 1L;
 	
 	private Integer id;
 	@JsonFormat(pattern = "dd/MM/yyyy")
 	private LocalDate openData = LocalDate.now();
+	
 	@JsonFormat(pattern = "dd/MM/yyyy")
 	private LocalDate closeData = null;
+	
+	@NotNull(message = "Field priority is required!")
 	private Integer priority;
+	
+	@NotNull(message = "Field status is required!")
 	private Integer status;
+	
+	@NotNull(message = "Field title is required!")
 	private String title;
+	
+	@NotNull(message = "Field observation is required!")
 	private String observation;
+	
+	@NotNull(message = "Field tecnic is required!")
 	private Integer tecnic;
+	
+	@NotNull(message = "Field client is required!")
 	private Integer client;
 	
 	private String tecnicName;
