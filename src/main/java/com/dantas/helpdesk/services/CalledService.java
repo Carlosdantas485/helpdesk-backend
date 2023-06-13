@@ -1,5 +1,6 @@
 package com.dantas.helpdesk.services;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
@@ -44,6 +45,14 @@ public class CalledService {
 		return repository.save(newCalled(objDTO));
 	}
 	
+	public Called update(Integer id, @Valid CalledDTO objDTO) {
+		objDTO.setId(id);
+		Called oldObj = findById(id);
+		oldObj = newCalled(objDTO);
+		
+		return repository.save(oldObj);
+	}
+	
 	private Called newCalled(CalledDTO obj) {
 		
 		Tecnic tecnic = tecnicService.findById(obj.getTecnic());
@@ -52,6 +61,10 @@ public class CalledService {
 		
 		if(obj.getId() != null) {
 			called.setId(obj.getId());
+		}
+		
+		if(obj.getStatus().equals(2)) {
+			called.setCloseData(LocalDate.now());
 		}
 		
 		called.setTecnic(tecnic);
@@ -63,6 +76,8 @@ public class CalledService {
 		
 		return called;
 	}
+
+	
 
 
 }

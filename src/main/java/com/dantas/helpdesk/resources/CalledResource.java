@@ -9,14 +9,13 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import com.dantas.helpdesk.domain.Called;
-import com.dantas.helpdesk.domain.Called;
-import com.dantas.helpdesk.domain.dtos.CalledDTO;
 import com.dantas.helpdesk.domain.dtos.CalledDTO;
 import com.dantas.helpdesk.services.CalledService;
 
@@ -51,4 +50,10 @@ public class CalledResource {
 		URI	uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(newObj.getId()).toUri();
 		return ResponseEntity.created(uri).build();
 	}
+	
+	@PutMapping(value = "/{id}")
+	public ResponseEntity<CalledDTO> update(@PathVariable Integer id, @Valid @RequestBody CalledDTO objDTO){
+		Called obj = service.update(id, objDTO);
+		return ResponseEntity.ok().body(new CalledDTO(obj));
+	} 
 }
