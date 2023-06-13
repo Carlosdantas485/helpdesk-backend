@@ -43,12 +43,20 @@ public class TecnicService {
 	
 	public Tecnic update(Integer id,@Valid TecnicDTO objDTO) {
 		objDTO.setId(id);
-		Tecnic oldObj= findById(id);
+		Tecnic oldObj = findById(id);
 		CPFvalidateAndEmail(objDTO);
 		oldObj = new Tecnic(objDTO);
 		return repository.save(oldObj);
 	}
-
+	
+	public void delet(Integer id) {
+		Tecnic obj = findById(id);
+		if(obj.getCalled().size() > 0) {
+			throw new DataIntegrityViolationException("This tecnic can't be deleted because he has tasks opened!");
+		}
+		repository.deleteById(id);
+	}
+	
 	private void CPFvalidateAndEmail(TecnicDTO objDTO) {
 		Optional <People> obj = peopleRepository.findByCpf(objDTO.getCpf());
 		
@@ -62,6 +70,8 @@ public class TecnicService {
 			throw new DataIntegrityViolationException("Email already exists!");
 		}
 	}
+
+	
 
 	
 

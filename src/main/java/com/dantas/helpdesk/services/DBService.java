@@ -34,11 +34,11 @@ public class DBService {
 
 		Client c1 = new Client(null, "Betina Campos", "598.508.200-80", "(88) 98888-7777", "12344");
 
-		Called os1 = new Called(null, Priority.HIGHT, Status.INPROGRESS, "Trocar fonte do notebook", "dasdas", t1, c1);
+		
 
 		tecnicRepository.saveAll(Arrays.asList(t1));
 		clientRepository.saveAll(Arrays.asList(c1));
-		calledRepository.saveAll(Arrays.asList(os1));
+		
 		
 		t1.addProfiles(Profile.ADMIN);
 		
@@ -51,25 +51,19 @@ public class DBService {
 		Client c3 = new Client(null, "Isaac Newton", "422.876.280-88", "(88) 95555-6541", "12344");
 		Client c4 = new Client(null, "Marie Curie", "420.724.490-57", "(88) 96666-8523", "12344");
 		Client c5 = new Client(null, "Albert Einstein", "047.166.710-20", "(88) 98755-4412", "12344");
-
+		
+		Called os1 = new Called(null, Priority.HIGHT, Status.INPROGRESS, "Trocar fonte do notebook", "dasdas", t2, c1);
 		Called os2 = new Called(null, Priority.LOW, Status.INPROGRESS, "Trocar placa mãe", "asdasdas", t2, c2);
 		Called os3 = new Called(null, Priority.HIGHT, Status.INPROGRESS, "Formatar para linux", "", t3, c3);
-		Called os4 = new Called(null, Priority.MEDIUM, Status.INPROGRESS, "Ativar antivirus", "", t4, c4);
+		Called os4 = new Called(null, Priority.MEDIUM, Status.INPROGRESS, "Ativar antivirus", "", t3, c4);
 		Called os5 = new Called(null, Priority.MEDIUM, Status.INPROGRESS, "Criar sistema full stack", "", t5, c5);
-		Called os6 = new Called(null, Priority.LOW, Status.INPROGRESS, "Trocar pasta térmica", "", t1, c1);
+		Called os6 = new Called(null, Priority.LOW, Status.INPROGRESS, "Trocar pasta térmica", "", t4, c1);
 
-		tecnicRepository.saveAll(Arrays.asList(t1));
-		tecnicRepository.saveAll(Arrays.asList(t2));
-		tecnicRepository.saveAll(Arrays.asList(t3));
-		tecnicRepository.saveAll(Arrays.asList(t4));
-		tecnicRepository.saveAll(Arrays.asList(t5));
-
-		clientRepository.saveAll(Arrays.asList(c1));
-		calledRepository.saveAll(Arrays.asList(os1));
-
+		
 		tecnicRepository.saveAll(Arrays.asList(t1, t2, t3, t4, t5));
 		clientRepository.saveAll(Arrays.asList(c1, c2, c3, c4, c5));
 		calledRepository.saveAll(Arrays.asList(os1, os2, os3, os4, os5, os6));
+		
 
 	}
 }

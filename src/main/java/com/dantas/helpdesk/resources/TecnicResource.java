@@ -6,6 +6,7 @@ import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -38,7 +39,6 @@ public class TecnicResource {
 	public ResponseEntity<List<TecnicDTO>> findAll(){ 
 		List<Tecnic> list = service.findAll();
 		List<TecnicDTO> listDTO = list.stream().map(obj -> new TecnicDTO(obj)).collect(Collectors.toList());
-		
 		return ResponseEntity.ok().body(listDTO);
 	}
 	
@@ -48,13 +48,18 @@ public class TecnicResource {
 		Tecnic newObj = service.create(objDTO);
 		URI	uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(newObj.getId()).toUri();
 		return ResponseEntity.created(uri).build();
-		
 	}
 	
 	@PutMapping(value = "/{id}")
 	public ResponseEntity<TecnicDTO> update(@PathVariable Integer id, @Valid @RequestBody TecnicDTO objDTO){
 		Tecnic obj = service.update(id, objDTO);
 		return ResponseEntity.ok().body(new TecnicDTO(obj));
+	}
+	
+	@DeleteMapping(value = "/{id}")
+	public ResponseEntity<TecnicDTO> delete(@PathVariable Integer id){
+		service.delet(id);
+		return ResponseEntity.noContent().build();
 	}
 	
 }
