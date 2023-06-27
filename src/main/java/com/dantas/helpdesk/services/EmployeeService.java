@@ -10,18 +10,18 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.dantas.helpdesk.domain.People;
-import com.dantas.helpdesk.domain.Tecnic;
-import com.dantas.helpdesk.domain.dtos.TecnicDTO;
+import com.dantas.helpdesk.domain.Employee;
+import com.dantas.helpdesk.domain.dtos.EmployeeDTO;
 import com.dantas.helpdesk.domain.repositories.PeopleRepository;
-import com.dantas.helpdesk.domain.repositories.TecnicRepository;
+import com.dantas.helpdesk.domain.repositories.EmployeeRepository;
 import com.dantas.helpdesk.services.exceptions.DataIntegrityViolationException;
 import com.dantas.helpdesk.services.exceptions.ObjectNotFoundException;
 
 @Service
-public class TecnicService {
+public class EmployeeService {
 
 	@Autowired
-	private TecnicRepository repository;
+	private EmployeeRepository repository;
 
 	@Autowired
 	private PeopleRepository peopleRepository;
@@ -29,40 +29,40 @@ public class TecnicService {
 	@Autowired
 	private BCryptPasswordEncoder encoder;
 
-	public Tecnic findById(Integer id) {
-		Optional<Tecnic> obj = repository.findById(id);
+	public Employee findById(Integer id) {
+		Optional<Employee> obj = repository.findById(id);
 		return obj.orElseThrow(() -> new ObjectNotFoundException("Object not found! Id: " + id));
 	}
 
-	public List<Tecnic> findAll() {
+	public List<Employee> findAll() {
 		return repository.findAll();
 	}
 
-	public Tecnic create(TecnicDTO objDTO) {
+	public Employee create(EmployeeDTO objDTO) {
 		objDTO.setId(null);
 		objDTO.setPassword(encoder.encode(objDTO.getPassword()));
 		CPFvalidateAndEmail(objDTO);
-		Tecnic newObj = new Tecnic(objDTO);
+		Employee newObj = new Employee(objDTO);
 		return repository.save(newObj);
 	}
 
-	public Tecnic update(Integer id, @Valid TecnicDTO objDTO) {
+	public Employee update(Integer id, @Valid EmployeeDTO objDTO) {
 		objDTO.setId(id);
-		Tecnic oldObj = findById(id);
+		Employee oldObj = findById(id);
 		CPFvalidateAndEmail(objDTO);
-		oldObj = new Tecnic(objDTO);
+		oldObj = new Employee(objDTO);
 		return repository.save(oldObj);
 	}
 
 	public void delet(Integer id) {
-		Tecnic obj = findById(id);
-		if (obj.getCalled().size() > 0) {
+		Employee obj = findById(id);
+		if (obj.getTiket().size() > 0) {
 			throw new DataIntegrityViolationException("This tecnic can't be deleted because he has tasks opened!");
 		}
 		repository.deleteById(id);
 	}
 
-	private void CPFvalidateAndEmail(TecnicDTO objDTO) {
+	private void CPFvalidateAndEmail(EmployeeDTO objDTO) {
 		Optional<People> obj = peopleRepository.findByCpf(objDTO.getCpf());
 
 		if (obj.isPresent() && obj.get().getId() != objDTO.getId()) {

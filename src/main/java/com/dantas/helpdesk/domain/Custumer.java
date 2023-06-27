@@ -15,8 +15,8 @@ public class Custumer extends People {
 	private static final long serialVersionUID = 1L;
 	
 	@JsonIgnore
-	@OneToMany(mappedBy = "client")
-	private List<Tiket> calleds = new ArrayList<>();
+	@OneToMany(mappedBy = "custumer")
+	private List<Tiket> tiket = new ArrayList<>();
 
 	public Custumer() {
 		super();
@@ -37,12 +37,12 @@ public class Custumer extends People {
 		this.dataCreatedUser = obj.getDataCreatedUser();
 	}
 
-	public List<Tiket> getCalled() {
-		return calleds;
+	public List<Tiket> getTiket() {
+		return tiket;
 	}
 
-	public void setCalled(List<Tiket> called) {
-		this.calleds = called;
+	public void setTiket(List<Tiket> tiket) {
+		this.tiket = tiket;
 	}
 	
 

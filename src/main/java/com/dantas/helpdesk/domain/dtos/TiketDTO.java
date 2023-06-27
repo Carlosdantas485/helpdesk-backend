@@ -31,13 +31,13 @@ public class TiketDTO implements Serializable{
 	private String observation;
 	
 	@NotNull(message = "Field tecnic is required!")
-	private Integer tecnic;
+	private Integer emplyee;
 	
 	@NotNull(message = "Field client is required!")
-	private Integer client;
+	private Integer custumer;
 	
-	private String tecnicName;
-	private String clientName;
+	private String emplyeeName;
+	private String custumerName;
 	public TiketDTO() {
 		super();
 	}
@@ -50,10 +50,10 @@ public class TiketDTO implements Serializable{
 		this.status = obj.getStatus().getCode();
 		this.title = obj.getTitle();
 		this.observation = obj.getObservation();
-		this.tecnic = obj.getTecnic().getId();
-		this.client = obj.getClient().getId();
-		this.tecnicName = obj.getTecnic().getName();
-		this.clientName = obj.getClient().getName();
+		this.emplyee = obj.getEmployee().getId();
+		this.custumer = obj.getCustumer().getId();
+		this.emplyeeName = obj.getEmployee().getName();
+		this.custumerName = obj.getEmployee().getName();
 	}
 	
 	public Integer getId() {
@@ -98,30 +98,29 @@ public class TiketDTO implements Serializable{
 	public void setObservation(String observation) {
 		this.observation = observation;
 	}
-	public Integer getTecnic() {
-		return tecnic;
+	public Integer getEmployee() {
+		return emplyee;
 	}
-	public void setTecnic(Integer tecnic) {
-		this.tecnic = tecnic;
+	public void setEmployee(Integer emplyee) {
+		this.emplyee = emplyee;
 	}
-	public Integer getClient() {
-		return client;
+	public Integer getCustumer() {
+		return custumer;
 	}
-	public void setClient(Integer client) {
-		this.client = client;
+	public void setCustumer(Integer custumer) {
+		this.custumer = custumer;
 	}
-	public String getTecnicName() {
-		return tecnicName;
+	public String getEmployeeName() {
+		return emplyeeName;
 	}
-	public void setTecnicName(String tecnicName) {
-		this.tecnicName = tecnicName;
+	public void setEmployeeName(String emplyeeName) {
+		this.emplyeeName = emplyeeName;
 	}
-	public String getClientName() {
-		return clientName;
+	public String getCustumerName() {
+		return custumerName;
 	}
-	public void setClientName(String clientName) {
-		this.clientName = clientName;
+	public void setCustumerName(String custumerName) {
+		this.custumerName = custumerName;
 	}
-	
 	
 }

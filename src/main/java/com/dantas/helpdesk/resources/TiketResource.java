@@ -22,7 +22,7 @@ import com.dantas.helpdesk.domain.dtos.TiketDTO;
 import com.dantas.helpdesk.services.TiketService;
 
 @RestController
-@RequestMapping(value = "/called")
+@RequestMapping(value = "/tiket")
 public class TiketResource {
 	
 	@Autowired

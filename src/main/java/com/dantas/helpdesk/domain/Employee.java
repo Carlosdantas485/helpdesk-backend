@@ -7,26 +7,26 @@ import java.util.stream.Collectors;
 import javax.persistence.Entity;
 import javax.persistence.OneToMany;
 
-import com.dantas.helpdesk.domain.dtos.TecnicDTO;
+import com.dantas.helpdesk.domain.dtos.EmployeeDTO;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
-public class Tecnic extends People {
+public class Employee extends People {
 	private static final long serialVersionUID = 1L;
 	
 	@JsonIgnore
-	@OneToMany(mappedBy = "tecnic")
-	private List<Tiket> called = new ArrayList<>();
+	@OneToMany(mappedBy = "employee")
+	private List<Tiket> tiket = new ArrayList<>();
 
-	public Tecnic() {
+	public Employee() {
 		super();
 	}
 
-	public Tecnic(Integer id, String name, String cpf, String email, String password) {
+	public Employee(Integer id, String name, String cpf, String email, String password) {
 		super(id, name, cpf, email, password);
 	}
 	
-	public Tecnic(TecnicDTO obj) {
+	public Employee(EmployeeDTO obj) {
 		super();
 		this.id = obj.getId();
 		this.name = obj.getName();
@@ -37,12 +37,12 @@ public class Tecnic extends People {
 		this.dataCreatedUser = obj.getDataCreatedUser();
 	}
 
-	public List<Tiket> getCalled() {
-		return called;
+	public List<Tiket> getTiket() {
+		return tiket;
 	}
 
-	public void setCalled(List<Tiket> called) {
-		this.called = called;
+	public void setTiket(List<Tiket> tiket) {
+		this.tiket = tiket;
 	}
 	
 	

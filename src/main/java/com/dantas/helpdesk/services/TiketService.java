@@ -11,7 +11,7 @@ import org.springframework.stereotype.Service;
 
 import com.dantas.helpdesk.domain.Tiket;
 import com.dantas.helpdesk.domain.Custumer;
-import com.dantas.helpdesk.domain.Tecnic;
+import com.dantas.helpdesk.domain.Employee;
 import com.dantas.helpdesk.domain.dtos.TiketDTO;
 import com.dantas.helpdesk.domain.enums.Priority;
 import com.dantas.helpdesk.domain.enums.Status;
@@ -25,7 +25,7 @@ public class TiketService {
 	private TiketRepository repository;
 	
 	@Autowired
-	private TecnicService tecnicService;
+	private EmployeeService tecnicService;
 	
 	@Autowired
 	private CustumerService clientService;
@@ -42,39 +42,39 @@ public class TiketService {
 	
 	public Tiket create(@Valid TiketDTO objDTO) {
 		
-		return repository.save(newCalled(objDTO));
+		return repository.save(newTiket(objDTO));
 	}
 	
 	public Tiket update(Integer id, @Valid TiketDTO objDTO) {
 		objDTO.setId(id);
 		Tiket oldObj = findById(id);
-		oldObj = newCalled(objDTO);
+		oldObj = newTiket(objDTO);
 		
 		return repository.save(oldObj);
 	}
 	
-	private Tiket newCalled(TiketDTO obj) {
+	private Tiket newTiket(TiketDTO obj) {
 		
-		Tecnic tecnic = tecnicService.findById(obj.getTecnic());
-		Custumer client = clientService.findById(obj.getClient());
-		Tiket called = new Tiket();
+		Employee employee = tecnicService.findById(obj.getEmployee());
+		Custumer custumer = clientService.findById(obj.getCustumer());
+		Tiket tiket = new Tiket();
 		
 		if(obj.getId() != null) {
-			called.setId(obj.getId());
+			tiket.setId(obj.getId());
 		}
 		
 		if(obj.getStatus().equals(2)) {
-			called.setCloseData(LocalDate.now());
+			tiket.setCloseData(LocalDate.now());
 		}
 		
-		called.setTecnic(tecnic);
-		called.setClient(client);
-		called.setPriority(Priority.toEnum(obj.getPriority()));
-		called.setStatus(Status.toEnum(obj.getStatus()));
-		called.setTitle(obj.getTitle());
-		called.setObservation(obj.getObservation());
+		tiket.setEmployee(employee);
+		tiket.setCustumer(custumer);
+		tiket.setPriority(Priority.toEnum(obj.getPriority()));
+		tiket.setStatus(Status.toEnum(obj.getStatus()));
+		tiket.setTitle(obj.getTitle());
+		tiket.setObservation(obj.getObservation());
 		
-		return called;
+		return tiket;
 	}
 
 	

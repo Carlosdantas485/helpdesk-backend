@@ -15,7 +15,7 @@ import com.dantas.helpdesk.domain.enums.Priority;
 import com.dantas.helpdesk.domain.enums.Status;
 import com.fasterxml.jackson.annotation.JsonFormat;
 
-@Entity (name = "tb_called")
+@Entity (name = "tb_tiket")
 public class Tiket {
 		private static final long serialVersionUID = 1L;
 		
@@ -36,27 +36,27 @@ public class Tiket {
 		private String observation;
 		
 		@ManyToOne
-		@JoinColumn(name = "tecnic_id")
-		private Tecnic tecnic;
+		@JoinColumn(name = "user_id")
+		private Employee employee;
 		
 		@ManyToOne
-		@JoinColumn(name = "client_id")
-		private Custumer client;
+		@JoinColumn(name = "custumer_id")
+		private Custumer custumer;
 		
 		public Tiket() {
 			super();
 		}
 
-		public Tiket(Integer id, Priority priority, Status status, String title, String observation, Tecnic tecnic,
-				Custumer client) {
+		public Tiket(Integer id, Priority priority, Status status, String title, String observation, Employee employee,
+				Custumer custumer) {
 			super();
 			this.id = id;
 			this.priority = priority;
 			this.status = status;
 			this.title = title;
 			this.observation = observation;
-			this.tecnic = tecnic;
-			this.client = client;
+			this.employee = employee;
+			this.custumer = custumer;
 		}
 
 		public Integer getId() {
@@ -115,20 +115,20 @@ public class Tiket {
 			this.observation = observation;
 		}
 
-		public Tecnic getTecnic() {
-			return tecnic;
+		public Employee getEmployee() {
+			return employee;
 		}
 
-		public void setTecnic(Tecnic tecnic) {
-			this.tecnic = tecnic;
+		public void setEmployee(Employee employee) {
+			this.employee = employee;
 		}
 
-		public Custumer getClient() {
-			return client;
+		public Custumer getCustumer() {
+			return custumer;
 		}
 
-		public void setClient(Custumer client) {
-			this.client = client;
+		public void setCustumer(Custumer custumer) {
+			this.custumer = custumer;
 		}
 
 		public static long getSerialversionuid() {

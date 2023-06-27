@@ -57,7 +57,7 @@ public class CustumerService {
 	public void delet(Integer id) {
 		Custumer obj = findById(id);
 		
-		if(obj.getCalled().size() > 0) {
+		if(obj.getTiket().size() > 0) {
 			throw new DataIntegrityViolationException("This client can't be deleted because he has tasks opened!");
 		}
 		repository.deleteById(id);

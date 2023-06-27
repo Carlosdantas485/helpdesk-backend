@@ -23,7 +23,7 @@ import com.dantas.helpdesk.domain.dtos.CustumerDTO;
 import com.dantas.helpdesk.services.CustumerService;
 
 @RestController
-@RequestMapping(value = "/client")
+@RequestMapping(value = "/custumer")
 public class CustumerResource {
 	
 	@Autowired

@@ -19,36 +19,36 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
-import com.dantas.helpdesk.domain.Tecnic;
-import com.dantas.helpdesk.domain.dtos.TecnicDTO;
-import com.dantas.helpdesk.services.TecnicService;
+import com.dantas.helpdesk.domain.Employee;
+import com.dantas.helpdesk.domain.dtos.EmployeeDTO;
+import com.dantas.helpdesk.services.EmployeeService;
 
 @RestController
-@RequestMapping(value = "/tecnic")
-public class TecnicResource {
+@RequestMapping(value = "/emplyees")
+public class EmployeeResource {
 	
 	@Autowired
-	private TecnicService service;
+	private EmployeeService service;
 	
 	@GetMapping(value = "/{id}")
-	public ResponseEntity<TecnicDTO> findById(@PathVariable Integer id) {
-		Tecnic obj = service.findById(id);
-		return ResponseEntity.ok().body(new TecnicDTO(obj));
+	public ResponseEntity<EmployeeDTO> findById(@PathVariable Integer id) {
+		Employee obj = service.findById(id);
+		return ResponseEntity.ok().body(new EmployeeDTO(obj));
 	}
 	
 	@GetMapping
-	public ResponseEntity<List<TecnicDTO>> findAll(){ 
-		List<Tecnic> list = service.findAll();
-		List<TecnicDTO> listDTO = list.stream().map(obj -> new TecnicDTO(obj)).collect(Collectors.toList());
+	public ResponseEntity<List<EmployeeDTO>> findAll(){ 
+		List<Employee> list = service.findAll();
+		List<EmployeeDTO> listDTO = list.stream().map(obj -> new EmployeeDTO(obj)).collect(Collectors.toList());
 		return ResponseEntity.ok().body(listDTO);
 	}
 	
 	//Define qual o tipo de perfil que pode acessar este tipo de endpoint
 	@PreAuthorize("hasAnyRole('ADMIN')")
 	@PostMapping
-	public ResponseEntity<TecnicDTO> create(@Valid @RequestBody TecnicDTO objDTO){
+	public ResponseEntity<EmployeeDTO> create(@Valid @RequestBody EmployeeDTO objDTO){
 		
-		Tecnic newObj = service.create(objDTO);
+		Employee newObj = service.create(objDTO);
 		URI	uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(newObj.getId()).toUri();
 		return ResponseEntity.created(uri).build();
 	}
@@ -56,15 +56,15 @@ public class TecnicResource {
 	//Define qual o tipo de perfil que pode acessar este tipo de endpoint
 	@PreAuthorize("hasAnyRole('ADMIN')")
 	@PutMapping(value = "/{id}")
-	public ResponseEntity<TecnicDTO> update(@PathVariable Integer id, @Valid @RequestBody TecnicDTO objDTO){
-		Tecnic obj = service.update(id, objDTO);
-		return ResponseEntity.ok().body(new TecnicDTO(obj));
+	public ResponseEntity<EmployeeDTO> update(@PathVariable Integer id, @Valid @RequestBody EmployeeDTO objDTO){
+		Employee obj = service.update(id, objDTO);
+		return ResponseEntity.ok().body(new EmployeeDTO(obj));
 	}
 	
 	//Define qual o tipo de perfil que pode acessar este tipo de endpoint
 	@PreAuthorize("hasAnyRole('ADMIN')")
 	@DeleteMapping(value = "/{id}")
-	public ResponseEntity<TecnicDTO> delete(@PathVariable Integer id){
+	public ResponseEntity<EmployeeDTO> delete(@PathVariable Integer id){
 		service.delet(id);
 		return ResponseEntity.noContent().build();
 	}
