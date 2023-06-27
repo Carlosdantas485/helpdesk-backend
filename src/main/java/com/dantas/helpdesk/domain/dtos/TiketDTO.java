@@ -5,10 +5,10 @@ import java.time.LocalDate;
 
 import javax.validation.constraints.NotNull;
 
-import com.dantas.helpdesk.domain.Called;
+import com.dantas.helpdesk.domain.Tiket;
 import com.fasterxml.jackson.annotation.JsonFormat;
 
-public class CalledDTO implements Serializable{
+public class TiketDTO implements Serializable{
 	private static final long serialVersionUID = 1L;
 	
 	private Integer id;
@@ -38,10 +38,10 @@ public class CalledDTO implements Serializable{
 	
 	private String tecnicName;
 	private String clientName;
-	public CalledDTO() {
+	public TiketDTO() {
 		super();
 	}
-	public CalledDTO(Called obj) {
+	public TiketDTO(Tiket obj) {
 		super();
 		this.id = obj.getId();
 		this.openData = obj.getOpenData();

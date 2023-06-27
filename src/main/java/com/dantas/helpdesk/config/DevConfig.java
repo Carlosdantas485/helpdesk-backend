@@ -19,7 +19,7 @@ public class DevConfig {
 	private String value;
 	
 	@Bean
-	public boolean DBInstance() {
+	boolean DBInstance() {
 		if(value.equals("create")) {
 			this.dbService.DBInstance();
 		}

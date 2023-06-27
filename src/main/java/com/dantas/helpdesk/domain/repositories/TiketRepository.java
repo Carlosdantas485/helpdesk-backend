@@ -2,8 +2,8 @@ package com.dantas.helpdesk.domain.repositories;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
-import com.dantas.helpdesk.domain.Called;
+import com.dantas.helpdesk.domain.Tiket;
 
-public interface CalledRepository extends JpaRepository<Called, Integer> {
+public interface TiketRepository extends JpaRepository<Tiket, Integer> {
 
 }

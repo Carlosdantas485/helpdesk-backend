@@ -16,7 +16,7 @@ public class Tecnic extends People {
 	
 	@JsonIgnore
 	@OneToMany(mappedBy = "tecnic")
-	private List<Called> called = new ArrayList<>();
+	private List<Tiket> called = new ArrayList<>();
 
 	public Tecnic() {
 		super();
@@ -37,11 +37,11 @@ public class Tecnic extends People {
 		this.dataCreatedUser = obj.getDataCreatedUser();
 	}
 
-	public List<Called> getCalled() {
+	public List<Tiket> getCalled() {
 		return called;
 	}
 
-	public void setCalled(List<Called> called) {
+	public void setCalled(List<Tiket> called) {
 		this.called = called;
 	}
 	

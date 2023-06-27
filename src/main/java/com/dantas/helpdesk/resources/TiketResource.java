@@ -17,43 +17,43 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
-import com.dantas.helpdesk.domain.Called;
-import com.dantas.helpdesk.domain.dtos.CalledDTO;
-import com.dantas.helpdesk.services.CalledService;
+import com.dantas.helpdesk.domain.Tiket;
+import com.dantas.helpdesk.domain.dtos.TiketDTO;
+import com.dantas.helpdesk.services.TiketService;
 
 @RestController
-@RequestMapping(value = "/calleds")
-public class CalledResource {
+@RequestMapping(value = "/called")
+public class TiketResource {
 	
 	@Autowired
-	private CalledService service;
+	private TiketService service;
 	
 	
 	@GetMapping(value = "/{id}")
-	public ResponseEntity<CalledDTO> findById(@PathVariable Integer id){
-		Called obj = service.findById(id);
-		return ResponseEntity.ok().body(new CalledDTO(obj));
+	public ResponseEntity<TiketDTO> findById(@PathVariable Integer id){
+		Tiket obj = service.findById(id);
+		return ResponseEntity.ok().body(new TiketDTO(obj));
 	}
 	
 	@GetMapping
-	public ResponseEntity<List<CalledDTO>> findAll(){
-		List<Called> list = service.findAll();
-		List<CalledDTO> listDTO = list.stream().map(obj -> new CalledDTO(obj)).collect(Collectors.toList());
+	public ResponseEntity<List<TiketDTO>> findAll(){
+		List<Tiket> list = service.findAll();
+		List<TiketDTO> listDTO = list.stream().map(obj -> new TiketDTO(obj)).collect(Collectors.toList());
 		return ResponseEntity.ok().body(listDTO);
 	}
 
 	
 	@PostMapping
-	public ResponseEntity<CalledDTO> create(@Valid @RequestBody CalledDTO objDTO){
+	public ResponseEntity<TiketDTO> create(@Valid @RequestBody TiketDTO objDTO){
 		
-		Called newObj = service.create(objDTO);
+		Tiket newObj = service.create(objDTO);
 		URI	uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(newObj.getId()).toUri();
 		return ResponseEntity.created(uri).build();
 	}
 	
 	@PutMapping(value = "/{id}")
-	public ResponseEntity<CalledDTO> update(@PathVariable Integer id, @Valid @RequestBody CalledDTO objDTO){
-		Called obj = service.update(id, objDTO);
-		return ResponseEntity.ok().body(new CalledDTO(obj));
+	public ResponseEntity<TiketDTO> update(@PathVariable Integer id, @Valid @RequestBody TiketDTO objDTO){
+		Tiket obj = service.update(id, objDTO);
+		return ResponseEntity.ok().body(new TiketDTO(obj));
 	} 
 }

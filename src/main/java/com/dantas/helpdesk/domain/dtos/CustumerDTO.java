@@ -8,11 +8,11 @@ import java.util.stream.Collectors;
 
 import javax.validation.constraints.NotNull;
 
-import com.dantas.helpdesk.domain.Client;
+import com.dantas.helpdesk.domain.Custumer;
 import com.dantas.helpdesk.domain.enums.Profile;
 import com.fasterxml.jackson.annotation.JsonFormat;
 
-public class ClientDTO implements Serializable {
+public class CustumerDTO implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	protected Integer id;
@@ -30,12 +30,12 @@ public class ClientDTO implements Serializable {
 	@JsonFormat(pattern = "dd/MM/yyyy")
 	protected LocalDate dataCreatedUser = LocalDate.now();
 
-	public ClientDTO() {
+	public CustumerDTO() {
 		super();
 		addProfiles(Profile.CLIENT);
 	}
 
-	public ClientDTO(Client obj) {
+	public CustumerDTO(Custumer obj) {
 		super();
 		this.id = obj.getId();
 		this.name = obj.getName();

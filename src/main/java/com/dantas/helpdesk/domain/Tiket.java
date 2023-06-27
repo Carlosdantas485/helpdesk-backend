@@ -16,7 +16,7 @@ import com.dantas.helpdesk.domain.enums.Status;
 import com.fasterxml.jackson.annotation.JsonFormat;
 
 @Entity (name = "tb_called")
-public class Called {
+public class Tiket {
 		private static final long serialVersionUID = 1L;
 		
 		@Id
@@ -41,14 +41,14 @@ public class Called {
 		
 		@ManyToOne
 		@JoinColumn(name = "client_id")
-		private Client client;
+		private Custumer client;
 		
-		public Called() {
+		public Tiket() {
 			super();
 		}
 
-		public Called(Integer id, Priority priority, Status status, String title, String observation, Tecnic tecnic,
-				Client client) {
+		public Tiket(Integer id, Priority priority, Status status, String title, String observation, Tecnic tecnic,
+				Custumer client) {
 			super();
 			this.id = id;
 			this.priority = priority;
@@ -123,11 +123,11 @@ public class Called {
 			this.tecnic = tecnic;
 		}
 
-		public Client getClient() {
+		public Custumer getClient() {
 			return client;
 		}
 
-		public void setClient(Client client) {
+		public void setClient(Custumer client) {
 			this.client = client;
 		}
 
@@ -148,7 +148,7 @@ public class Called {
 				return false;
 			if (getClass() != obj.getClass())
 				return false;
-			Called other = (Called) obj;
+			Tiket other = (Tiket) obj;
 			return Objects.equals(id, other.id);
 		}
 		

@@ -9,55 +9,55 @@ import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.dantas.helpdesk.domain.Called;
-import com.dantas.helpdesk.domain.Client;
+import com.dantas.helpdesk.domain.Tiket;
+import com.dantas.helpdesk.domain.Custumer;
 import com.dantas.helpdesk.domain.Tecnic;
-import com.dantas.helpdesk.domain.dtos.CalledDTO;
+import com.dantas.helpdesk.domain.dtos.TiketDTO;
 import com.dantas.helpdesk.domain.enums.Priority;
 import com.dantas.helpdesk.domain.enums.Status;
-import com.dantas.helpdesk.domain.repositories.CalledRepository;
+import com.dantas.helpdesk.domain.repositories.TiketRepository;
 import com.dantas.helpdesk.services.exceptions.ObjectNotFoundException;
 
 @Service
-public class CalledService {
+public class TiketService {
 	
 	@Autowired
-	private CalledRepository repository;
+	private TiketRepository repository;
 	
 	@Autowired
 	private TecnicService tecnicService;
 	
 	@Autowired
-	private ClientService clientService;
+	private CustumerService clientService;
 	
-	public Called findById(Integer id) {
-		Optional<Called> obj = repository.findById(id);
+	public Tiket findById(Integer id) {
+		Optional<Tiket> obj = repository.findById(id);
 		return obj.orElseThrow(() -> new ObjectNotFoundException("Object not found! ID:" + id));
 		
 	}
 	
-	public List<Called> findAll(){
+	public List<Tiket> findAll(){
 		return repository.findAll();
 	}
 	
-	public Called create(@Valid CalledDTO objDTO) {
+	public Tiket create(@Valid TiketDTO objDTO) {
 		
 		return repository.save(newCalled(objDTO));
 	}
 	
-	public Called update(Integer id, @Valid CalledDTO objDTO) {
+	public Tiket update(Integer id, @Valid TiketDTO objDTO) {
 		objDTO.setId(id);
-		Called oldObj = findById(id);
+		Tiket oldObj = findById(id);
 		oldObj = newCalled(objDTO);
 		
 		return repository.save(oldObj);
 	}
 	
-	private Called newCalled(CalledDTO obj) {
+	private Tiket newCalled(TiketDTO obj) {
 		
 		Tecnic tecnic = tecnicService.findById(obj.getTecnic());
-		Client client = clientService.findById(obj.getClient());
-		Called called = new Called();
+		Custumer client = clientService.findById(obj.getClient());
+		Tiket called = new Tiket();
 		
 		if(obj.getId() != null) {
 			called.setId(obj.getId());

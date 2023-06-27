@@ -24,7 +24,7 @@ import com.dantas.helpdesk.domain.dtos.TecnicDTO;
 import com.dantas.helpdesk.services.TecnicService;
 
 @RestController
-@RequestMapping(value = "/tecnics")
+@RequestMapping(value = "/tecnic")
 public class TecnicResource {
 	
 	@Autowired
