@@ -4,8 +4,11 @@ import java.net.URI;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -19,8 +22,6 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import com.dantas.helpdesk.domain.Tecnic;
 import com.dantas.helpdesk.domain.dtos.TecnicDTO;
 import com.dantas.helpdesk.services.TecnicService;
-
-import jakarta.validation.Valid;
 
 @RestController
 @RequestMapping(value = "/tecnics")
@@ -42,6 +43,8 @@ public class TecnicResource {
 		return ResponseEntity.ok().body(listDTO);
 	}
 	
+	//Define qual o tipo de perfil que pode acessar este tipo de endpoint
+	@PreAuthorize("hasAnyRole('ADMIN')")
 	@PostMapping
 	public ResponseEntity<TecnicDTO> create(@Valid @RequestBody TecnicDTO objDTO){
 		
@@ -50,12 +53,16 @@ public class TecnicResource {
 		return ResponseEntity.created(uri).build();
 	}
 	
+	//Define qual o tipo de perfil que pode acessar este tipo de endpoint
+	@PreAuthorize("hasAnyRole('ADMIN')")
 	@PutMapping(value = "/{id}")
 	public ResponseEntity<TecnicDTO> update(@PathVariable Integer id, @Valid @RequestBody TecnicDTO objDTO){
 		Tecnic obj = service.update(id, objDTO);
 		return ResponseEntity.ok().body(new TecnicDTO(obj));
 	}
 	
+	//Define qual o tipo de perfil que pode acessar este tipo de endpoint
+	@PreAuthorize("hasAnyRole('ADMIN')")
 	@DeleteMapping(value = "/{id}")
 	public ResponseEntity<TecnicDTO> delete(@PathVariable Integer id){
 		service.delet(id);

@@ -3,10 +3,10 @@ package com.dantas.helpdesk.domain.dtos;
 import java.io.Serializable;
 import java.time.LocalDate;
 
+import javax.validation.constraints.NotNull;
+
 import com.dantas.helpdesk.domain.Called;
 import com.fasterxml.jackson.annotation.JsonFormat;
-
-import jakarta.validation.constraints.NotNull;
 
 public class CalledDTO implements Serializable{
 	private static final long serialVersionUID = 1L;
@@ -55,6 +55,7 @@ public class CalledDTO implements Serializable{
 		this.tecnicName = obj.getTecnic().getName();
 		this.clientName = obj.getClient().getName();
 	}
+	
 	public Integer getId() {
 		return id;
 	}

@@ -3,7 +3,10 @@ package com.dantas.helpdesk.services;
 import java.util.List;
 import java.util.Optional;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.dantas.helpdesk.domain.Client;
@@ -14,8 +17,6 @@ import com.dantas.helpdesk.domain.repositories.PeopleRepository;
 import com.dantas.helpdesk.services.exceptions.DataIntegrityViolationException;
 import com.dantas.helpdesk.services.exceptions.ObjectNotFoundException;
 
-import jakarta.validation.Valid;
-
 @Service
 public class ClientService {
 	
@@ -24,6 +25,9 @@ public class ClientService {
 	
 	@Autowired
 	private PeopleRepository peopleRepository;
+	
+	@Autowired
+	private BCryptPasswordEncoder encoder;
 	
 	public Client findById(Integer id) {
 		Optional<Client> obj = repository.findById(id);
@@ -36,6 +40,7 @@ public class ClientService {
 
 	public Client create(ClientDTO objDTO) {
 		objDTO.setId(null);
+		objDTO.setPassword(encoder.encode(objDTO.getPassword()));
 		CPFvalidateAndEmail(objDTO);
 		Client newObj = new Client(objDTO);
 		return repository.save(newObj);

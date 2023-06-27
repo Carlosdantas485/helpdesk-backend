@@ -1,5 +1,7 @@
 package com.dantas.helpdesk.resources.exceptions;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.FieldError;
@@ -10,8 +12,6 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import com.dantas.helpdesk.services.exceptions.DataIntegrityViolationException;
 import com.dantas.helpdesk.services.exceptions.ObjectNotFoundException;
 import com.dantas.helpdesk.services.exceptions.ValidationError;
-
-import jakarta.servlet.http.HttpServletRequest;
 
 @ControllerAdvice
 public class ResourceExceptionsHandler {

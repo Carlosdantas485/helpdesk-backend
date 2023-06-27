@@ -1,7 +1,7 @@
 package com.dantas.helpdesk.domain.enums;
 
 public enum Priority {
-	LOW(0, "ROLE_LOW"), MEDIUM(1, "ROLE_CLIENT"), HIGHT(2, "ROLE_HIGHT");
+	LOW(0, "ROLE_LOW"), MEDIUM(1, "ROLE_CLIENT"), HIGH(2, "ROLE_HIGH");
 	
 	private Integer code;
 	private String description;

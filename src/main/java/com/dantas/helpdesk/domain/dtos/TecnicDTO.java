@@ -6,11 +6,11 @@ import java.util.HashSet;
 import java.util.Set;
 import java.util.stream.Collectors;
 
+import javax.validation.constraints.NotNull;
+
 import com.dantas.helpdesk.domain.Tecnic;
 import com.dantas.helpdesk.domain.enums.Profile;
 import com.fasterxml.jackson.annotation.JsonFormat;
-
-import jakarta.validation.constraints.NotNull;
 
 public class TecnicDTO implements Serializable {
 	private static final long serialVersionUID = 1L;
